@@ -1,0 +1,2 @@
+#!/bin/sh
+sed -i "s/<POSTMASTER_ADDRESS>/${postmaster_address:=postmaster@test.pi}/" /etc/dovecot/dovecot.conf
