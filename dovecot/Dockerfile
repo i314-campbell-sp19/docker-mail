@@ -1,6 +1,6 @@
 FROM alpine 
 
-RUN apk add --no-cache dovecot \
+RUN apk add --no-cache dovecot dovecot-lmtpd \
     && addgroup -S -g 5000 vmail \
     && adduser -S -u 5000 -g vmail -h /home/vmail vmail \
     && touch /var/log/dovecot.log /var/log/dovecot-info.log \ 
