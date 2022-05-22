@@ -85,4 +85,4 @@ By default, containers will remain stopped if we reboot or otherwise restart the
 
 If you already have a running container, there's no need to remove it in order to change the default behavior. Instead, use `docker update` to set the restart behavior for your current container(s), e.g.:
 
-`docker update --restart-always postfix rainloop dovecot`
+`docker update --restart always postfix rainloop dovecot`
