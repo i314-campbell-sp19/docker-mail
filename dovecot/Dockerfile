@@ -3,7 +3,7 @@ FROM debian:stable-slim
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update && apt install -y dovecot-imapd dovecot-lmtpd \
-    && adduser --system --group --disabled-login --home /home/vmail vmail \
+    && adduser --system --uid 5000 --group --disabled-login --home /home/vmail vmail \
     && touch /var/log/dovecot.log /var/log/dovecot-info.log \ 
     && mkdir -p /Maildir \
     && chown vmail:vmail /var/log/dovecot.log /var/log/dovecot-info.log /Maildir
