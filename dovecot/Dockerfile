@@ -1,8 +1,9 @@
-FROM alpine 
+FROM debian:stable-slim 
 
-RUN apk add --no-cache dovecot dovecot-lmtpd \
-    && addgroup -S -g 5000 vmail \
-    && adduser -S -u 5000 -g vmail -h /home/vmail vmail \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update && apt install -y dovecot-imapd dovecot-lmtpd \
+    && adduser --system --group --disabled-login --home /home/vmail vmail \
     && touch /var/log/dovecot.log /var/log/dovecot-info.log \ 
     && mkdir -p /Maildir \
     && chown vmail:vmail /var/log/dovecot.log /var/log/dovecot-info.log /Maildir

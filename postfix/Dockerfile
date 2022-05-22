@@ -1,7 +1,7 @@
-FROM alpine
+FROM debian:stable-slim
 
 # Postfix install 
-RUN apk add --no-cache  bash postfix \
+RUN apt update && apt install -y bash postfix \
     && touch /var/log/mail.log
 COPY docker-entrypoint.sh /
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
