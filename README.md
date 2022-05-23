@@ -1,10 +1,5 @@
 
 # Configuring Mail Containers on Raspberry Pi OS
-## Install Docker (Raspberry Pi OS)
-The easiest method of installing Docker on a Raspberry Pi running Raspberry Pi OS, is to execute a scripted install from the Docker website. 
-
-1. `curl -sSL get.docker.com | sh` to install Docker
-2. `sudo usermod -aG docker pi` to allow the pi user to manage Docker
 
 ## Launch and configure mail services
 In its current state, this repository provides a minimally functional mail environment based on separate postfix (SMTP), dovecot (IMAP), and rainloop (webmail) containers.
