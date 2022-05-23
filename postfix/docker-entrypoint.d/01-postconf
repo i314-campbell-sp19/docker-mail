@@ -19,7 +19,6 @@ postconf -e inet_interfaces=all
 postconf -e inet_protocols=ipv4
 postconf -e virtual_transport=lmtp:inet:${lmtp_host:=dovecot.docker-mail:24}
 postconf -e virtual_mailbox_domains=${mail_domain:=test.pi}
-postconf -M "smtp/inet = smtp inet n - n - - smtpd"
 postconf -M "submission/inet = submission inet n - n - - smtpd"
 postconf -P "submission/inet/smtpd_recipient_restrictions="
 postconf -P "submission/inet/smtpd_sasl_auth_enable=yes"
