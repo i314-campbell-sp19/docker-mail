@@ -3,7 +3,8 @@ FROM debian:stable-slim
 ENV DEBIAN_FRONTEND noninteractive
 
 # Postfix install 
-RUN apt update && apt install -y bash postfix \
+RUN  echo "postfix postfix/main_mailer_type string 'No Configuration'" | debconf-set-selections \
+    && apt update && apt install -y bash postfix \
     && touch /var/log/mail.log
 COPY docker-entrypoint.sh /
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
