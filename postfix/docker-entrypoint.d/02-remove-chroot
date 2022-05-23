@@ -1,2 +1,2 @@
+#!/bin/bash
 sed -E -i 's/^([^# ]+\s+[^ ]+\s+[^ ]+\s+[^ ]+\s+)([^ ]+)(\s+[^ ]+\s+[^ ]+\s+.*)$/\1n\3/' /etc/postfix/master.cf
-
