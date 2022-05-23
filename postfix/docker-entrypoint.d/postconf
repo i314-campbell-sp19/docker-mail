@@ -1,4 +1,5 @@
 #!/bin/bash
+postconf -e maillog_file=/dev/stdout
 postconf -e myorigin='$mydomain'
 postconf -e smtpd_banner='$myhostname ESMTP $mail_name (Debian/GNU)'
 postconf -e biff=no
