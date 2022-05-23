@@ -1,5 +1,7 @@
 FROM debian:stable-slim
 
+ENV DEBIAN_FRONTEND noninteractive
+
 # Postfix install 
 RUN apt update && apt install -y bash postfix \
     && touch /var/log/mail.log
