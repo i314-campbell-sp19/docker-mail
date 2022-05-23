@@ -1,34 +1,33 @@
 
-# Configure a Dockerized 
-## Install Docker (Raspbian Stretch)
-The easiest method of installing Docker on a Raspberry Pi running Raspbian, is to execute a scripted install from the Docker website. 
+# Configuring Mail Containers on Raspberry Pi OS
+## Install Docker (Raspberry Pi OS)
+The easiest method of installing Docker on a Raspberry Pi running Raspberry Pi OS, is to execute a scripted install from the Docker website. 
 
 1. `curl -sSL get.docker.com | sh` to install Docker
 2. `sudo usermod -aG docker pi` to allow the pi user to manage Docker
-3. `echo gpu_mem=16 | sudo tee -a /boot/config.txt` to decrease memory reserved for graphics operations (Optional step to improve performance)
 
 ## Launch and configure mail services
-In its current state, this repository provides a minimally functional ARM-based mail environment based on separate postfix (SMTP), dovecot (IMAP), and rainloop (webmail) containers.
+In its current state, this repository provides a minimally functional mail environment based on separate postfix (SMTP), dovecot (IMAP), and rainloop (webmail) containers.
 
-1. Clone or copy the repo to a raspberry pi or other ARM based device.
+1. Install git (if required) with `sudo apt install git` and then clone this repo locally.
 2. Navigate to the sub-directories for each service and build a tagged image. 
-    - `docker build -t postfix .` in `mail/postfix`
-    - `docker build -t dovecot .` in `mail/dovecot`
-    - `docker build -t rainloop .` in `mail/rainloop`
+    - In `docker-mail/postfix` run `docker build -t postfix .` 
+    - In `docker-mail/dovecot` run `docker build -t dovecot .` 
+    - In `docker-mail/rainloop` run `docker build -t rainloop .` 
 3. Create a user-defined container network: 
     - `docker network create --driver bridge --opt com.docker.network.bridge.name=docker-mail docker-mail`
 4. Launch the containers as shown below:
     - `docker run -itd --name dovecot --network docker-mail -p 143:143 dovecot`
     - `docker run -itd --name postfix --network docker-mail -p 25:25 postfix`
     - `docker run -itd --name rainloop --network docker-mail -p 80:80 rainloop`
-5. In a browser, navigate to `http://HOSTNAME/?admin` to configure a new domain:
+5. In a browser, navigate to `http://<hostname>/?admin` to configure a new domain:
     - Configure a new domain called `test.pi`
         - Default admin: `admin` / `12345`
         - Test domain: `test.pi`
-        - SMTP: `postfix.docker-mail:587`
         - IMAP: `dovecot.docker-mail:143`
+        - SMTP: `postfix.docker-mail:587`
     - Set the default domain under the Login tab to `test.pi`
-6. Navigate to `http://HOSTNAME/` to access webmail.
+6. Navigate to `http://<hostname>/` to access webmail.
     - Test user: `pi@test.pi` / `password`
 
 ## Restarting your containers
