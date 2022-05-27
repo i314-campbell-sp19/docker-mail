@@ -15,14 +15,14 @@ In its current state, this repository provides a minimally functional mail envir
     - `docker run -itd --name dovecot --network docker-mail -p 143:143 dovecot`
     - `docker run -itd --name postfix --network docker-mail -p 25:25 postfix`
     - `docker run -itd --name rainloop --network docker-mail -p 80:80 rainloop`
-5. In a browser, navigate to `http://<hostname>/?admin` to configure a new domain:
+5. In a browser, navigate to `http://<webmail-hostname>/?admin` to configure a new domain:
     - Configure a new domain called `test.pi`
         - Default admin: `admin` / `12345`
         - Test domain: `test.pi`
         - IMAP: `dovecot.docker-mail:143`
         - SMTP: `postfix.docker-mail:587`
     - Set the default domain under the Login tab to `test.pi`
-6. Navigate to `http://<hostname>/` to access webmail.
+6. Navigate to `http://<webmail-hostname>/` to access webmail.
     - Test user: `pi@test.pi` / `password`
 
 ## Restarting your containers
